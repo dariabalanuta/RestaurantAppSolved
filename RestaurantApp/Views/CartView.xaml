@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:help="clr-namespace:RestaurantApp.Helpers"
+             xmlns:mod="clr-namespace:RestaurantApp.Models"
+             xmlns:vm="clr-namespace:RestaurantApp.ViewModels"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="RestaurantApp.Views.CartView"
+             Visual="Material"
+             BackgroundColor="#533747">
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <BoxView Grid.Row="0"/>
+            <Label Text="Restaurant App" FontSize="40" TextColor="#ECE6D5"
+                   HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label x:Name="LabelName" FontSize="Subtitle" TextColor="#ECE6D5"
+                   HorizontalOptions="Center" VerticalOptions="End"/>
+            <ImageButton Source="{FontImage FontFamily=FontAwesome, 
+                         Glyph={x:Static mod:fontAwesome.ArrowLeft}, Size=30, Color=White}"
+                         Grid.Row="0" HorizontalOptions="Start" Margin="10,30" VerticalOptions="Start"  BackgroundColor="Transparent"
+                         Clicked="ImageButton_Clicked"/>
+            <pancake:PancakeView Grid.Row="1" BackgroundColor="#ECE6D5" CornerRadius="60,60,0,0">
+                <ListView x:Name="ListViewCartItems" Margin="20" 
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding CartItems}"
+                          Header="" HasUnevenRows="True">
+                    <ListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,40,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Id" Grid.Column="0" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                                <Label Text="Name" Grid.Column="1" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                                <Label Text="Price" Grid.Column="2" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                                <Label Text="Qty" Grid.Column="3" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                                <Label Text="Cost" Grid.Column="4" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                                <Label Text="Table" Grid.Column="5" FontSize="Subtitle" FontAttributes="Bold" TextColor="Silver"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.HeaderTemplate>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="2.5*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding ProductId}" Grid.Column="0" FontSize="Body" TextColor="#533747"/>
+                                    <Label Text="{Binding CartItemName}" Grid.Column="1" FontSize="Body" TextColor="#533747" />
+                                    <Label Text="{Binding CartItemPrice,StringFormat='{0}₽'}" Grid.Column="2" FontSize="Body" TextColor="#533747"/>
+                                    <Label Text="{Binding CartItemQuantity,StringFormat='{0} p.'}" Grid.Column="3" FontSize="Body" TextColor="#533747"/>
+                                    <Label Text="{Binding CartItemCost,StringFormat='{0}₽'}" Grid.Column="4" FontSize="Body" TextColor="#533747"/>
+                                    <Label Text="{Binding tableId}" Grid.Column="5" FontSize="Body" TextColor="#533747"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </pancake:PancakeView>
+            <Label Text="{Binding TotalCost, StringFormat='Total Cost: {0:c}'}"
+                   Grid.Row="2" HorizontalTextAlignment="End" FontSize="Title" TextColor="#ECE6D5"/>
+
+            <Button Text="Place Order" BackgroundColor="#57B5A8" Grid.Row="3" TextColor="#ECE6D5"
+                    Command="{Binding PlaceOrderCommand}" Margin="10" 
+                    HorizontalOptions="Center" CornerRadius="10"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

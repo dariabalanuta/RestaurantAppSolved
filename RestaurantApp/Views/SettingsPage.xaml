@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RestaurantApp.Views.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Reform Categories" x:Name="btnReformCategories" Clicked="btnReformCategories_Clicked"/>
+            <Button Text="Reform Products" x:Name="btnReformProducts" Clicked="btnReformProducts_Clicked"/>
+            <Button Text="Manage Cart" x:Name="btnCart" Clicked="btnCart_Clicked"/>
+            <Button Text="Reform Tables" x:Name="btnTables" Clicked="btnTable_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

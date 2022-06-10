@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:help="clr-namespace:RestaurantApp.Helpers"
+             xmlns:mod="clr-namespace:RestaurantApp.Models"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="RestaurantApp.Views.ProductsDetailsView"
+             Visual="Material" >
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="{Binding SelectedDishItem.DishImage}"
+                   Aspect="AspectFill" HeightRequest="250" VerticalOptions="Start"/>
+            <Label Grid.Row="0" Text="{Binding SelectedDishItem.DishName}"  VerticalOptions="End" HorizontalOptions="Start" Margin="10,40"
+                   TextColor="White" FontAttributes="Bold" 
+                   FontSize="30" />
+            <ImageButton Source="{FontImage FontFamily=FontAwesome, 
+                             Glyph={x:Static mod:fontAwesome.ArrowLeft}, Size=30, Color=White}"
+                         Grid.Row="0" HorizontalOptions="Start" Margin="10,30" VerticalOptions="Start"  BackgroundColor="Transparent"
+                         Clicked="ImageButton_Clicked"/>
+            <pancake:PancakeView Grid.Row="1" CornerRadius="30,30, 0, 0"  BackgroundColor="#ECE6D5" Margin="0,-40,0,0" >
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0" Spacing="10" Padding="10" VerticalOptions="Start" >
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Product Id:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishID}" FontSize="Subtitle"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Product Name:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishName}" FontSize="Subtitle" LineBreakMode="WordWrap"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Description:" FontSize="Subtitle" LineBreakMode="NoWrap" />
+                            <Label Text="{Binding SelectedDishItem.DishDescription}" WidthRequest="250" FontSize="Subtitle" LineBreakMode="CharacterWrap"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Rating:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishRating}" FontSize="Subtitle"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Calories:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishCalories}" FontSize="Subtitle"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Prepare Time:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishPrepareTime}" FontSize="Subtitle"
+                           TextColor="Black"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="Gramm:" FontSize="Subtitle" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding SelectedDishItem.DishGramm}" FontSize="Subtitle"
+                           TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" HorizontalOptions="Center" Orientation="Horizontal">
+                        <Button Text="-" FontSize="30" TextColor="White" CornerRadius="10"
+                        BackgroundColor="#533747"
+                        HorizontalOptions="Start" 
+                        Command="{Binding DecrementOrderCommand}"/>
+                        <Entry Text="{Binding TotalQuantity}" HorizontalTextAlignment="Center"
+                        FontSize="30"/>
+                        <Button Text="+" FontSize="30" TextColor="White" CornerRadius="10"
+                        BackgroundColor="#533747" 
+                        HorizontalOptions="End" 
+                        Command="{Binding IncrementOrderCommand}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="End">
+                        <Button Text="Add To Cart" BackgroundColor="#fd9827"
+                            HorizontalOptions="Center" CornerRadius="10" Command="{Binding AddToCartCommand}"
+                            HeightRequest="50" WidthRequest="150"/>
+                        <Button Text="View Cart" CornerRadius="10" BackgroundColor="#57B5A8"
+                            HorizontalOptions="Center" Command="{Binding ViewCartCommand}"
+                            HeightRequest="50"  WidthRequest="150"/>
+
+
+                    </StackLayout>
+
+                    <Button Text="Go To Home" BackgroundColor="#533747" Command="{Binding HomeCommand}" 
+                            HeightRequest="50" Grid.Row="3" CornerRadius="10" VerticalOptions="End"/>
+                    
+                </Grid>
+            </pancake:PancakeView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

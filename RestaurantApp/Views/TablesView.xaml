@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:RestaurantApp.ViewModels"
+             xmlns:help="clr-namespace:RestaurantApp.Fonts"
+             xmlns:mod="clr-namespace:RestaurantApp.Models"
+             x:Class="RestaurantApp.Views.TablesView"
+             BackgroundColor="#ece6d5">
+    <ContentPage.Content>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Welcome" Grid.Row="0" Grid.Column="0" TextColor="#533747" FontAttributes="Bold"/>
+            <Label Text="{Binding UserName}" Grid.Row="1" Grid.Column="0" 
+                       FontSize="20" FontAttributes="Bold"/>
+
+            <ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BackgroundColor="Transparent"
+                             Source="{FontImage FontFamily=FontAwesome, 
+                             Glyph={x:Static mod:fontAwesome.List}, Color=#533747}"
+                             HorizontalOptions="End" VerticalOptions="Start" Margin="10" />
+
+            <ImageButton Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" BackgroundColor="Transparent"
+                             Source="{FontImage FontFamily=FontAwesome, 
+                             Glyph={x:Static mod:fontAwesome.ArrowRight}, Color=#533747}"
+                             HorizontalOptions="End" Margin="10"
+                             Command="{Binding LogOutCommand}" VerticalOptions="Start"/>
+
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0, 30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Tables" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#533747" FontAttributes="Bold" Margin="5" FontSize="30"/>
+                <CollectionView ItemsSource="{Binding Tables}"
+                            Margin="10"
+                            VerticalOptions="FillAndExpand"
+                            ItemsLayout="VerticalGrid, 3"
+                                InputTransparent="True"
+                            SelectionChanged="CollectionView_SelectionChanged" 
+                            SelectionMode="Single"
+                            Grid.Row="1"
+                                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" >
+                                <Frame HeightRequest="60" HasShadow="False" BackgroundColor="#57B5A8" CornerRadius="10" WidthRequest="60" >
+                                    <Label Text="{Binding TableName}" HorizontalTextAlignment="Center" TextColor="#ECE6D5" 
+                                           VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold" />
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </Grid>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="Add Table"  FontSize="Subtitle" FontAttributes="Bold"
+                    HeightRequest="60" BackgroundColor="#533747" CornerRadius="10" WidthRequest="100"
+                    HorizontalOptions="End" 
+                    VerticalOptions="End"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
